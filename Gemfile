@@ -13,7 +13,7 @@ gem 'font-awesome-sass', '~> 5.6.1'
 gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
-# gem 'webpacker'
+gem 'webpacker'
 
 gem 'faker'
 gem 'devise'
