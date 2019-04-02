@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_045144) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_id"
+    t.string "open_id"
     t.string "username"
     t.boolean "manager", default: false
     t.datetime "created_at", null: false
