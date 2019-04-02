@@ -2,6 +2,7 @@ class Api::V1::BookingsController < ApplicationController
   before_action :set_booking, only: [:destroy]
 
   def index
+    @bookings = Booking.all
   end
 
   def create
