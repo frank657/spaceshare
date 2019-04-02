@@ -6,4 +6,5 @@ class Space < ApplicationRecord
   validates :picture, presence: true
   validates :price, presence: true
   validates :user_id, presence: true
+  validates :available_spots, presence: true
 end
