@@ -10,9 +10,10 @@ class Api::V1::SpacesController < Api::V1::BaseController
   end
 
   def create
-    current_user
+    # current_user
     @space = Space.new(space_params)
-    @space.user = @user
+    # binding.pry
+    # @space.user = @user
     if @space.save
       render :show
     else
@@ -39,6 +40,6 @@ class Api::V1::SpacesController < Api::V1::BaseController
   end
 
   def space_params
-    params.require(:space).permit(:name, :district, :address_details, :picture, :price, :available_spots, :wifi, :sofa_area, :coffee, :beer, :purified_air)
+    params.require(:space).permit(:name, :district, :user_id, :address_details, :picture, :price, :available_spots, :wifi, :sofa_area, :coffee, :beer, :purified_air)
   end
 end
