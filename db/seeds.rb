@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
+# require 'faker'
 
 # Booking.destroy_all
 # p "Deteled bookings"
@@ -13,6 +13,11 @@ require 'faker'
 # p "Deteled spaces"
 # User.destroy_all
 # p "Deteled users"
+Booking.delete_all if Rails.env.development?
+Space.delete_all if Rails.env.development?
+User.delete_all if Rails.env.development?
+
+
 
 user_1 = User.create!(open_id: 1, username: Faker::FunnyName.name, manager: true)
 
@@ -89,3 +94,17 @@ booking_19 = Booking.create!(space_id: rand(space_1.id..space_10.id), user_id: r
 booking_20 = Booking.create!(space_id: rand(space_1.id..space_10.id), user_id: rand(user_1.id..user_5.id), date: Faker::Date.forward(60))
 
 # p "Created #{Booking.count} bookings"
+
+Space.all.each do |s|
+  s.price = rand(20..100)
+  s.wifi = [true, false].sample
+  s.sofa_area = [true, false].sample
+  s.coffee = [true, false].sample
+  s.beer = [true, false].sample
+  s.purified_air = [true, false].sample
+  s.save
+end
+
+p "Created #{User.count} users"
+p "Created #{Booking.count} bookings"
+p "Created #{Space.count} spaces"
