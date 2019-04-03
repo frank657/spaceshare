@@ -1,5 +1,6 @@
-class Api::V1::SpacesController < ApplicationController
+class Api::V1::SpacesController < Api::V1::BaseController
   before_action :set_space, only: [:show, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def index
     @spaces = Space.all
@@ -9,8 +10,9 @@ class Api::V1::SpacesController < ApplicationController
   end
 
   def create
+    current_user
     @space = Space.new(space_params)
-    @space.user = current_user
+    @space.user = @user
     if @space.save
       render :show
     else
@@ -37,10 +39,6 @@ class Api::V1::SpacesController < ApplicationController
   end
 
   def space_params
-    params.require(:space).permit(:name, :district, :address_details, :picture, :price, :available_spots, :user_id, :wifi, :sofa_area, :coffee, :beer, :purified_air)
-  end
-
-  def render_errors
-    @space.errors.full_messages
+    params.require(:space).permit(:name, :district, :address_details, :picture, :price, :available_spots, :wifi, :sofa_area, :coffee, :beer, :purified_air)
   end
 end
