@@ -1,16 +1,18 @@
 class Api::V1::BookingsController < Api::V1::BaseController
   before_action :set_booking, only: [:destroy]
+  before_action :set_space, only: [:create]
+  skip_before_action :verify_authenticity_token
 
-  def index
-    # current_user
-    # @bookings = @user.bookings
-    @bookings = Booking.all
-  end
+  # def index
+  #   # current_user
+  #   # @bookings = @user.bookings
+  #   @bookings = Booking.all
+  # end
 
   def create
-    current_user
+    # current_user
+    # binding.pry
     @booking = Booking.new(booking_params)
-    @booking.user = @user
     @booking.space = @space
     if @booking.save
       render :index
@@ -26,14 +28,14 @@ class Api::V1::BookingsController < Api::V1::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:date, :space_id)
+    params.require(:booking).permit(:date, :user_id)
   end
 
   def set_booking
-    @booking = Booking.find(params(:id))
+    @booking = Booking.find(params[:id])
   end
 
   def set_space
-    @space = Space.find(params(:space_id)) # may need change...
+    @space = Space.find(params[:space_id])
   end
 end
