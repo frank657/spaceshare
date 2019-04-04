@@ -3,7 +3,12 @@ class Api::V1::SpacesController < Api::V1::BaseController
   skip_before_action :verify_authenticity_token
 
   def index
-    @spaces = Space.all
+    # binding.pry
+    if params[:district].nil?
+      @spaces = Space.all
+    else
+      @spaces = Space.where(district: params[:district])
+    end
   end
 
   def show
