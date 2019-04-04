@@ -2,8 +2,9 @@ class Api::V1::BookingsController < Api::V1::BaseController
   before_action :set_booking, only: [:destroy]
 
   def index
-    current_user
-    @bookings = @user.bookings
+    # current_user
+    # @bookings = @user.bookings
+    @bookings = Booking.all
   end
 
   def create
