@@ -19,6 +19,8 @@ class Api::V1::SpacesController < Api::V1::BaseController
     @space = Space.new(space_params)
     # binding.pry
     # @space.user = @user
+    @space.full_address = "#{@space.address_details}, #{@space.district}, Shanghai"
+    # s.full_address = "#{s.address_details}, #{s.district}, Shanghai"
     if @space.save
       render :show
     else
