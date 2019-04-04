@@ -19,7 +19,7 @@ class Api::V1::BaseController < ActionController::Base
   end
 
   def current_user
-    @user = User.find(params(:id))
+    @user = User.find(params[:id])
   end
 
   def render_errors
