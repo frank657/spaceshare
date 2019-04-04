@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_045144) do
+ActiveRecord::Schema.define(version: 2019_04_04_110725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 2019_04_02_045144) do
     t.boolean "beer", default: false
     t.boolean "purified_air", default: false
     t.integer "available_spots"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "full_address"
     t.index ["user_id"], name: "index_spaces_on_user_id"
   end
 
