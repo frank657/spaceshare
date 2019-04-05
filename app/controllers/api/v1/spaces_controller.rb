@@ -19,9 +19,10 @@ class Api::V1::SpacesController < Api::V1::BaseController
     @space = Space.new(space_params)
     # binding.pry
     # @space.user = @user
-    @space.full_address = "#{@space.address_details}, #{@space.district}, Shanghai"
     # s.full_address = "#{s.address_details}, #{s.district}, Shanghai"
     if @space.save
+      # @space.user.manager = true
+      # @space.user.save
       render :show
     else
       render_errors
@@ -37,7 +38,9 @@ class Api::V1::SpacesController < Api::V1::BaseController
   end
 
   def destroy
+    @user = @space.user
     @space.delete
+    @user.update(manager: false) if @user.spaces == 0
   end
 
   private
