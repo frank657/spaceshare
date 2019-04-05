@@ -9,4 +9,14 @@ class Space < ApplicationRecord
   validates :available_spots, presence: true
   geocoded_by :full_address
   after_validation :geocode, if: :will_save_change_to_full_address?
+  before_save :set_address
+  after_save :set_manager
+
+  def set_address
+    self.full_address = "#{self.address_details}, #{self.district}, Shanghai"
+  end
+
+  def set_manager
+    self.user.update(manager: true)
+  end
 end
